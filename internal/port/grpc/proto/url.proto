@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package pb;
+option go_package = ".pb";
+
+message ShortUrl {
+  string url = 1;
+}
+
+message LongUrl {
+  string url = 1;
+}
+
+message LongUrlParam {
+  string longUrl = 1;
+}
+
+message ShortUrlParam {
+  string shortUrl = 1;
+}
+
+service UrlHandler {
+  rpc Create (LongUrlParam) returns (ShortUrl);
+  rpc Get (ShortUrlParam) returns (LongUrl);
+  rpc Delete (ShortUrlParam) returns (google.protobuf.Empty);
+}
